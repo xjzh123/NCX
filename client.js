@@ -127,11 +127,11 @@ var verifyNickname = function (nick) {
 
 //主页
 var homeText = "# NewCrackedX\n##### \n-----\n"+
-"当前NCX版本：beta0.1(alpha0.12)\n"+
-"对应XC版本：22/8/16\n"+
+"当前NCX版本：lambda0.1(beta0.2(alpha0.13))\n"+
+"对应XC版本：22/9/30\n"+
 "**更新日志：**\n"+
 "成功获取XC全部网页文件并在本地HTTP服务器正常访问；\nWS地址修改，可以正常连接XC；\n验证码地址替换，可以正常输入验证码；指纹替换；\n新增封杀免疫功能，且HTML消息会额外在控制台输出；\n主页更改为NCX主页；\n字体改为本地资源\n"+
-"新增指纹种子功能，可以修改指纹种子，可以自动随机生成指纹种子；\n主页修改；\n新增免疫shout功能；\n新增真私聊功能；ajax改为本地资源；\n安全私聊功能修改；\n更新为新版昵称显示系统（支持昵称颜色、管理员星星）"+
+"新增指纹种子功能，可以修改指纹种子，可以自动随机生成指纹种子；\n主页修改；\n新增免疫shout功能；\n新增真私聊功能；ajax改为本地资源；\n安全私聊功能修改；\n更新为新版昵称显示系统（支持昵称颜色、管理员星星）；\n破解指纹加密，修复指纹功能"+
 "\n"+
 "--- \n"+
 "共有聊天室：[?xq102210](/?xq102210) \n"+
@@ -430,10 +430,11 @@ function join(channel) {
 		await getMurmur();
 		if (myNick && shouldConnect) {
 			pushMessage({ nick: '*', text: "正在加入聊天室，这可能需要一些时间，请稍后。。。" });
-			localStorageSet('my-nick', myNick);
+			localStorageSet('my-nick', myNick.split('#')[0]);
 			localStorageSet('murmurseed',murmurseed)
 			console.log(`[NCX] murmur:${murmur}`)
-			payload.murmur = murmur
+			payload.murmur = _0x5176bb(murmur).toString()
+			console.log(`[NCX] encrypted murmur:${payload.murmur}`)
 			send(payload);
 		}
 		var h5_mynick = document.querySelector("#mynick")
@@ -457,11 +458,18 @@ function join(channel) {
 		var cmd = args.cmd;
 
 		var command = COMMANDS[cmd];
-		command.call(null, args);
-		
-
-		
+		command.call(null, args);	
 	}
+
+	function _0x5176bb(_0x3d6092) {
+		var _0x50bd80 = key = "fa_hJSFenvc0dJ24";
+	  
+		return CryptoJS["AES"]["encrypt"](_0x3d6092, CryptoJS["enc"]["Utf8"]["parse"](key), {
+		  "iv": CryptoJS["enc"]["Utf8"]["parse"](_0x50bd80),
+		  "mode": CryptoJS["mode"]["CBC"],
+		  "padding": CryptoJS["pad"]["Pkcs7"]
+		});
+	  }
 }
 
 function joinHC(channel) {
