@@ -133,7 +133,8 @@ var homeText = "# NewCrackedX\n##### \n-----\n"+
 "成功获取XC全部网页文件并在本地HTTP服务器正常访问；\nWS地址修改，可以正常连接XC；\n验证码地址替换，可以正常输入验证码；指纹替换；\n新增封杀免疫功能，且HTML消息会额外在控制台输出；\n主页更改为NCX主页；\n字体改为本地资源\n"+
 "新增指纹种子功能，可以修改指纹种子，可以自动随机生成指纹种子；\n主页修改；\n新增免疫shout功能；\n新增真私聊功能；ajax改为本地资源；\n安全私聊功能修改；\n更新为新版昵称显示系统（支持昵称颜色、管理员星星），对bye命令做了一定程度的免疫处理；\n**破解指纹加密，修复指纹功能**"+
 "\n"+
-"--- \n 声明：NCX可能会出现没有自定义首页、功能残缺的版本，是无法移植原版客户端功能到标准版本时的实验版本，暂定代号lambda或ksi。\n"+
+"--- \n"+
+"声明：NCX可能会出现没有自定义首页、功能残缺的版本，是无法移植原版客户端功能到标准版本时的实验版本，暂定代号lambda或ksi。\n\n"+
 "--- \n"+
 "共有聊天室：[?xq102210](/?xq102210) \n"+
 "机器人聊天室：[?bot](/?bot) \n"+
@@ -141,7 +142,7 @@ var homeText = "# NewCrackedX\n##### \n-----\n"+
 "随机聊天室： ?" +Math.random().toString(36).slice(2, 10)+ "\n"+
 "--- \n"+
 "由ee编写的使用手册：https://paperee.tk/XChat.html  \n"+
-"开源网址：https://gitee.com/liguiyu102210/xchat  \n"+
+"开源网址：https://gitee.com/liguiyu102210/xchat（由于小张错把salt上传，已关闭浏览权限）  \n"+
 "hackchat开源网址：https://github.com/hack-chat/  \n"+
 "--- \n"+
 "鸣谢用户：[@ee](https://paperee.tk)，[@Mr_Zhang](https://mrzhang365.github.io/)\n"+
@@ -413,13 +414,12 @@ function join(channel) {
 			murmurseed = localStorageGet('murmurseed')
 		}
 		*/
-		murmurseed = prompt('指纹种子：（留空随机）',localStorageGet('murmurseed')) || Math.random().toString(36).slice(2, 10)
+		murmurseed = prompt('指纹种子：（留空随机；输入real使用真实指纹）',localStorageGet('murmurseed')) || Math.random().toString(36).slice(2, 10)
 		/*
 		if (murmurseed === '') {
 			murmurseed = Math.random().toString(36).slice(2, 10)
 		}
 		*/
-		console.log(`[NCX] murmurseed:${murmurseed}`)
 
 		if (!(/^[a-zA-Z0-9_]{1,20}$/.test(myNick.split('#')[0])) && connectHC) {
 			alert('要连接HC，需要使用英文昵称，并且昵称需要少于20位。您可以继续使用，但HC服务器不会连接。')
@@ -1782,11 +1782,14 @@ async function getMurmur() {
     */
     await Fingerprint2.getPromise({}).then(components => {
         // 参数
-        /*
 		const values = components.map(function (component) {
-            return component.value
-        });
-		*/
+			return component.value
+		});
+		console.log(`[NCX]real murmurseed:${values[19].join('')}`)
+        if (murmurseed == 'real') {//真实指纹
+			murmurseed = values[19].join('');
+		}
+		console.log(`[NCX] current murmurseed:${murmurseed}`)
         // 指纹
         murmur = Fingerprint2.x64hash128(murmurseed, 31);
         //console.log(murmur)
