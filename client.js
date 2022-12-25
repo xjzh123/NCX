@@ -8,7 +8,7 @@ var markdownOptions = {
 	langPrefix: '',
 	linkify: true,
 	linkTarget: '_blank" rel="noreferrer',
-	typographer:  true,
+	typographer: true,
 	quotes: `""''`,
 
 	doHighlight: true,
@@ -18,12 +18,12 @@ var markdownOptions = {
 		if (lang && hljs.getLanguage(lang)) {
 			try {
 				return hljs.highlight(lang, str).value;
-			} catch (__) {}
+			} catch (__) { }
 		}
 
 		try {
 			return hljs.highlightAuto(str).value;
-		} catch (__) {}
+		} catch (__) { }
 
 		return '';
 	}
@@ -82,20 +82,20 @@ md.renderer.rules.image = function (tokens, idx, options) {
 		return '<a href="' + src + '" target="_blank" rel="noreferrer"><img' + scrollOnload + imgSrc + alt + title + suffix + '></a>';
 	}
 
-  return '<a href="' + src + '" target="_blank" rel="noreferrer">' + Remarkable.utils.escapeHtml(Remarkable.utils.replaceEntities(src)) + '</a>';
+	return '<a href="' + src + '" target="_blank" rel="noreferrer">' + Remarkable.utils.escapeHtml(Remarkable.utils.replaceEntities(src)) + '</a>';
 };
 
 md.renderer.rules.link_open = function (tokens, idx, options) {
 	var title = tokens[idx].title ? (' title="' + Remarkable.utils.escapeHtml(Remarkable.utils.replaceEntities(tokens[idx].title)) + '"') : '';
-  var target = options.linkTarget ? (' target="' + options.linkTarget + '"') : '';
-  return '<a rel="noreferrer" onclick="return verifyLink(this)" href="' + Remarkable.utils.escapeHtml(tokens[idx].href) + '"' + title + target + '>';
+	var target = options.linkTarget ? (' target="' + options.linkTarget + '"') : '';
+	return '<a rel="noreferrer" onclick="return verifyLink(this)" href="' + Remarkable.utils.escapeHtml(tokens[idx].href) + '"' + title + target + '>';
 };
 
-md.renderer.rules.text = function(tokens, idx) {
+md.renderer.rules.text = function (tokens, idx) {
 	tokens[idx].content = Remarkable.utils.escapeHtml(tokens[idx].content);
 
 	if (tokens[idx].content.indexOf('?') !== -1) {
-		tokens[idx].content = tokens[idx].content.replace(/(^|\s)(\?)\S+?(?=[,.!?:)]?\s|$)/gm, function(match) {
+		tokens[idx].content = tokens[idx].content.replace(/(^|\s)(\?)\S+?(?=[,.!?:)]?\s|$)/gm, function (match) {
 			var channelLink = Remarkable.utils.escapeHtml(Remarkable.utils.replaceEntities(match.trim()));
 			var whiteSpace = '';
 			if (match[0] !== '?') {
@@ -105,7 +105,7 @@ md.renderer.rules.text = function(tokens, idx) {
 		});
 	}
 
-  return tokens[idx].content;
+	return tokens[idx].content;
 };
 
 md.use(remarkableKatex);
@@ -126,28 +126,28 @@ var verifyNickname = function (nick) {
 }
 
 //主页
-var homeText = "# NewCrackedX\n##### \n-----\n"+
-"当前NCX版本：lambda0.1(beta0.2(alpha0.13))\n"+
-"对应XC版本：22/9/30\n"+
-"**更新日志：**\n"+
-"成功获取XC全部网页文件并在本地HTTP服务器正常访问；\nWS地址修改，可以正常连接XC；\n验证码地址替换，可以正常输入验证码；指纹替换；\n新增封杀免疫功能，且HTML消息会额外在控制台输出；\n主页更改为NCX主页；\n字体改为本地资源\n"+
-"新增指纹种子功能，可以修改指纹种子，可以自动随机生成指纹种子；\n主页修改；\n新增免疫shout功能；\n新增真私聊功能；ajax改为本地资源；\n安全私聊功能修改；\n更新为新版昵称显示系统（支持昵称颜色、管理员星星），对bye命令做了一定程度的免疫处理；\n**破解指纹加密，修复指纹功能**"+
-"\n"+
-"--- \n"+
-"声明：NCX可能会出现没有自定义首页、功能残缺的版本，是无法移植原版客户端功能到标准版本时的实验版本，暂定代号lambda或ksi。\n\n"+
-"--- \n"+
-"共有聊天室：[?xq102210](/?xq102210) \n"+
-"机器人聊天室：[?bot](/?bot) \n"+
-"挂机池：[?75tz2vv8](/?75tz2vv8) \n"+
-"随机聊天室： ?" +Math.random().toString(36).slice(2, 10)+ "\n"+
-"--- \n"+
-"由ee编写的使用手册：https://paperee.tk/XChat.html  \n"+
-"开源网址：https://gitee.com/liguiyu102210/xchat（由于小张错把salt上传，已关闭浏览权限）  \n"+
-"hackchat开源网址：https://github.com/hack-chat/  \n"+
-"--- \n"+
-"鸣谢用户：[@ee](https://paperee.tk)，[@Mr_Zhang](https://mrzhang365.github.io/)\n"+
-"友情链接：[XChat库](https://github.com/MrZhang365/XChat-Lib-for-Python) [Homer-信鸽](https://gitee.com/BirdingLight/homer/releases/) [TChat-原生hc中文聊天室](https://chat.thz.cool)\n"+
-"~~2022 XQ Team.~~\n2022 YC USERS.";
+var homeText = "# NewCrackedX\n##### \n-----\n" +
+	"当前NCX版本：lambda0.1(beta0.2(alpha0.13))\n" +
+	"对应XC版本：22/9/30\n" +
+	"**更新日志：**\n" +
+	"成功获取XC全部网页文件并在本地HTTP服务器正常访问；\nWS地址修改，可以正常连接XC；\n验证码地址替换，可以正常输入验证码；指纹替换；\n新增封杀免疫功能，且HTML消息会额外在控制台输出；\n主页更改为NCX主页；\n字体改为本地资源\n" +
+	"新增指纹种子功能，可以修改指纹种子，可以自动随机生成指纹种子；\n主页修改；\n新增免疫shout功能；\n新增真私聊功能；ajax改为本地资源；\n安全私聊功能修改；\n更新为新版昵称显示系统（支持昵称颜色、管理员星星），对bye命令做了一定程度的免疫处理；\n**破解指纹加密，修复指纹功能**" +
+	"\n" +
+	"--- \n" +
+	"声明：NCX可能会出现没有自定义首页、功能残缺的版本，是无法移植原版客户端功能到标准版本时的实验版本，暂定代号lambda或ksi。\n\n" +
+	"--- \n" +
+	"共有聊天室：[?xq102210](/?xq102210) \n" +
+	"机器人聊天室：[?bot](/?bot) \n" +
+	"挂机池：[?75tz2vv8](/?75tz2vv8) \n" +
+	"随机聊天室： ?" + Math.random().toString(36).slice(2, 10) + "\n" +
+	"--- \n" +
+	"由ee编写的使用手册：https://paperee.tk/XChat.html  \n" +
+	"开源网址：https://gitee.com/liguiyu102210/xchat（由于小张错把salt上传，已关闭浏览权限）  \n" +
+	"hackchat开源网址：https://github.com/hack-chat/  \n" +
+	"--- \n" +
+	"鸣谢用户：[@ee](https://paperee.tk)，[@Mr_Zhang](https://mrzhang365.github.io/)\n" +
+	"友情链接：[XChat库](https://github.com/MrZhang365/XChat-Lib-for-Python) [Homer-信鸽](https://gitee.com/BirdingLight/homer/releases/) [TChat-原生hc中文聊天室](https://chat.thz.cool)\n" +
+	"~~2022 XQ Team.~~\n2022 YC USERS.";
 
 function $$(query) {
 	return document.querySelector(query);
@@ -166,8 +166,8 @@ function localStorageSet(key, val) {
 }
 
 var ws;
-var wsHC;
-var wsCC;
+// var wsHC;
+// var wsCC;
 var myNick = localStorageGet('my-nick') || '';
 var myChannel = window.location.search.replace(/^\?/, '');
 var lastSent = [""];
@@ -267,19 +267,19 @@ if (notifySetting === "true" || notifySetting === true) {
 } else if (notifySetting === "false" || notifySetting === false) {
 	soundSwitch.checked = false
 }
-var allow_HTML_check=document.getElementById('allow-html')
+var allow_HTML_check = document.getElementById('allow-html')
 if (localStorageGet('allow-html') === 'true') {
 	allow_HTML_check.checked = true;
 	allowHTML = true;
-}else{
+} else {
 	allow_HTML_check.checked = false;
 	allowHTML = false;
 }
 
 allow_HTML_check.onchange = function (e) {
 	var enabled = !!e.target.checked;
-	if ( !!e.target.checked ) {
-		pushMessage({ nick: '!', text: '# 安全提醒：\n允许显示HTML信息可能会导致一些安全风险（例如==密码被盗取==）。\n非必要不允许显示HTML信息！'});
+	if (!!e.target.checked) {
+		pushMessage({ nick: '!', text: '# 安全提醒：\n允许显示HTML信息可能会导致一些安全风险（例如==密码被盗取==）。\n非必要不允许显示HTML信息！' });
 	}
 	localStorageSet('allow-html', enabled);
 	allowHTML = enabled;
@@ -364,26 +364,26 @@ function join(channel) {
 	var wasConnected = false;
 
 	ws.onopen = async function () {
-		
+
 		var shouldConnect = true;
 		var payload = {//更新鱼鱼的新加入代码
-			cmd:'join',
-			channel:channel,
-			client_key:'XChatYYDS_'
+			cmd: 'join',
+			channel: channel,
+			client_key: 'XChatYYDS_'
 		}
 		if (!wasConnected) {
-			if(localStorageGet('auto-login') == 'true' && localStorageGet('my-nick')) {
+			if (localStorageGet('auto-login') == 'true' && localStorageGet('my-nick')) {
 				myNick = localStorageGet('my-nick')
 				payload.nick = myNick
-				if (cookie){
+				if (cookie) {
 					payload.cookie = cookie
 				}
 			} else {
 				if (location.hash) {
 					myNick = location.hash.substr(1);
 				} else {
-					if (cookie && myNick){
-						if (confirm(`是否使用这个用户信息登录：\n${myNick}`)){
+					if (cookie && myNick) {
+						if (confirm(`是否使用这个用户信息登录：\n${myNick}`)) {
 							payload.nick = myNick
 							payload.cookie = cookie
 						} else {
@@ -414,7 +414,7 @@ function join(channel) {
 			murmurseed = localStorageGet('murmurseed')
 		}
 		*/
-		murmurseed = prompt('指纹种子：（留空随机；输入real使用真实指纹）',localStorageGet('murmurseed')) || Math.random().toString(36).slice(2, 10)
+		murmurseed = prompt('指纹种子：（留空随机；输入real使用真实指纹）', localStorageGet('murmurseed')) || Math.random().toString(36).slice(2, 10)
 		/*
 		if (murmurseed === '') {
 			murmurseed = Math.random().toString(36).slice(2, 10)
@@ -426,20 +426,20 @@ function join(channel) {
 		}
 		localStorageSet('allow-imgur', true);
 		allowImages = true;
-		
+
 		//send({ cmd: 'warn', text:'--以上内容为历史记录--'});
 		await getMurmur();
 		if (myNick && shouldConnect) {
 			pushMessage({ nick: '*', text: "正在加入聊天室，这可能需要一些时间，请稍后。。。" });
 			localStorageSet('my-nick', myNick.split('#')[0]);
-			localStorageSet('murmurseed',murmurseed)
+			localStorageSet('murmurseed', murmurseed)
 			console.log(`[NCX] murmur:${murmur}`)
 			payload.murmur = _0x5176bb(murmur).toString()
 			console.log(`[NCX] encrypted murmur:${payload.murmur}`)
 			send(payload);
 		}
 		var h5_mynick = document.querySelector("#mynick")
-		h5_mynick.innerHTML = '当前昵称：'+myNick.split('#')[0]
+		h5_mynick.innerHTML = '当前昵称：' + myNick.split('#')[0]
 		console.log(`[NCX] allowOld:${allowOld}`)
 		wasConnected = true;
 	}
@@ -459,18 +459,18 @@ function join(channel) {
 		var cmd = args.cmd;
 
 		var command = COMMANDS[cmd];
-		command.call(null, args);	
+		command.call(null, args);
 	}
 
 	function _0x5176bb(_0x3d6092) {
 		var _0x50bd80 = key = "fa_hJSFenvc0dJ24";
-	  
+
 		return CryptoJS["AES"]["encrypt"](_0x3d6092, CryptoJS["enc"]["Utf8"]["parse"](key), {
-		  "iv": CryptoJS["enc"]["Utf8"]["parse"](_0x50bd80),
-		  "mode": CryptoJS["mode"]["CBC"],
-		  "padding": CryptoJS["pad"]["Pkcs7"]
+			"iv": CryptoJS["enc"]["Utf8"]["parse"](_0x50bd80),
+			"mode": CryptoJS["mode"]["CBC"],
+			"padding": CryptoJS["pad"]["Pkcs7"]
 		});
-	  }
+	}
 }
 
 function joinHC(channel) {
@@ -480,13 +480,13 @@ function joinHC(channel) {
 
 	wsHC.onopen = function () {
 		var shouldConnect = true;
-		
+
 		if (myNick && shouldConnect) {
 			if (channel == 'xq102210') {
 				channel = 'your-channel'
 				//channel = 'crosst'
 			}
-			wsHC.send(JSON.stringify({ cmd: 'join', channel: channel, nick: 'XC_'+myNick.split('#')[0], password: myNick.split('#')[1] }));
+			wsHC.send(JSON.stringify({ cmd: 'join', channel: channel, nick: 'XC_' + myNick.split('#')[0], password: myNick.split('#')[1] }));
 		}
 		wasConnected = true;
 		//wsHC.send(JSON.stringify({ cmd: 'chat', text: '自动发送：[当前用户处于互通功能](https://xq.kzw.ink)'}));
@@ -502,18 +502,18 @@ function joinHC(channel) {
 		if (connectHC) {
 			var args = JSON.parse(message.data);
 			var cmd = args.cmd;
-			if(args.text && args.text.indexOf("New beta available") == -1 && args.nick!='XC_'+myNick.split('#')[0] && cmd=='chat' && args.nick.indexOf('XC_')<0) {
-				if (cmd == 'chat' || cmd=='join' || (cmd=='info' && args.type == 'whisper')) {
+			if (args.text && args.text.indexOf("New beta available") == -1 && args.nick != 'XC_' + myNick.split('#')[0] && cmd == 'chat' && args.nick.indexOf('XC_') < 0) {
+				if (cmd == 'chat' || cmd == 'join' || (cmd == 'info' && args.type == 'whisper')) {
 					console.log(args)
 					var command = COMMANDS[cmd];
-					args.nick = 'HC_'+args.nick
+					args.nick = 'HC_' + args.nick
 					args.head = 'https://hack.chat/android-icon-72x72.png'
 					command.call(null, args);
 				}
-				
+
 			}
 		}
-		
+
 	}
 }
 /*
@@ -561,17 +561,17 @@ function joinCC(channel) {
 nicks = null
 var COMMANDS = {
 	list: function (args) {
-		
+
 		args.tag = 'old'
 		pushMessage(args);
 		console.log(args)
-		if(args.text.length == 0) {
-			pushMessage({ nick: '*', text: "----没有历史记录----"})
+		if (args.text.length == 0) {
+			pushMessage({ nick: '*', text: "----没有历史记录----" })
 		} else {
-			pushMessage({ nick: '*', text: "----以上为历史记录----"})
+			pushMessage({ nick: '*', text: "----以上为历史记录----" })
 		}
 		var a_nicks = []
-		for (var i=0; i<nicks.length; i+=1) {
+		for (var i = 0; i < nicks.length; i += 1) {
 			if (!(nicks[i].indexOf('挂机') > 0)) {
 				a_nicks.push(nicks[i])
 			}
@@ -583,11 +583,11 @@ var COMMANDS = {
 			localStorageSet("came", "true")
 		}
 	},
-	rmCookie:function(args){
+	rmCookie: function (args) {
 		localStorageSet("my-nick", '')
 		localStorageSet('auto-login', 'false')
 		localStorageSet("cookie", '')
-		pushMessage({nick:'*',text:'已清除您的登录信息'})
+		pushMessage({ nick: '*', text: '已清除您的登录信息' })
 	},//更新鱼鱼的新cookie功能
 	chat: function (args) {
 		console.log(args)
@@ -597,35 +597,35 @@ var COMMANDS = {
 		head = args.head
 		pushMessage(args);
 	},
-	html:function (args){
-		if (allowHTML){
+	html: function (args) {
+		if (allowHTML) {
 			pushHTML(args)
-		}else{
-			pushMessage({nick:'!',text:`[NCX] ${args.nick} 发送了一条HTML信息，但当前设置禁止显示。已在控制台记录HTML信息。`})
+		} else {
+			pushMessage({ nick: '!', text: `[NCX] ${args.nick} 发送了一条HTML信息，但当前设置禁止显示。已在控制台记录HTML信息。` })
 		}
 		console.log(args)
 	},
 	kill: function (args) {
 		console.log(mynick)
-		if(args.nick==myNick.split('#')[0]) {
+		if (args.nick == myNick.split('#')[0]) {
 			localStorageSet("killed", 0)
-			pushMessage({ nick: '*', text: "[NCX] 已免疫封杀"});
+			pushMessage({ nick: '*', text: "[NCX] 已免疫封杀" });
 		}
-		pushMessage({ nick: '*', text: "已==封杀== "+args.nick});
+		pushMessage({ nick: '*', text: "已==封杀== " + args.nick });
 	},
 	unkill: function (args) {
 		console.log(args)
-		if(args.nick==myNick.split('#')[0]) {
+		if (args.nick == myNick.split('#')[0]) {
 			localStorageSet("killed", 0)
 		}
-		pushMessage({ nick: '*', text: "已取消封杀 "+args.nick});
+		pushMessage({ nick: '*', text: "已取消封杀 " + args.nick });
 	},
 	info: function (args) {
 		args.nick = '*';
 		pushMessage(args);
 	},
 	shout: function (args) {
-		pushMessage({ nick: '*', text:'[NCX] 已免疫shout，shout内容：'+args.text})
+		pushMessage({ nick: '*', text: '[NCX] 已免疫shout，shout内容：' + args.text })
 	},
 
 	warn: function (args) {
@@ -646,18 +646,18 @@ var COMMANDS = {
 		});
 		if (!allowOld) {
 			var a_nicks = []
-			for (var i=0; i<nicks.length; i+=1) {
+			for (var i = 0; i < nicks.length; i += 1) {
 				if (!(nicks[i].indexOf('挂机') > 0)) {
 					a_nicks.push(nicks[i])
 				}
 			}
 			pushMessage({ nick: '*', text: "在线用户: " + a_nicks.join(", ") })
-			
+
 		}
-		if (args.cookie){
-			localStorageSet('cookie',args.cookie)
+		if (args.cookie) {
+			localStorageSet('cookie', args.cookie)
 		}//鱼鱼的cookie功能
-		
+
 	},
 
 	onlineAdd: function (args) {
@@ -673,11 +673,11 @@ var COMMANDS = {
 				pushMessage({ nick: '*', text: nick + " 加入了聊天室" });
 			}
 			*/
-			if (args.city === undefined) {args.city = '定位失败'}
+			if (args.city === undefined) { args.city = '定位失败' }
 			if (args.auth !== undefined) {
-				pushMessage({ nick: '*', text: nick + " 加入了聊天室，该用户来自："+args.city+"\nTA正在使用 "+args.client+"\n系统认证："+args.auth});
-			}else{
-				pushMessage({ nick: '*', text: nick + " 加入了聊天室，该用户来自："+args.city+"\nTA正在使用 "+args.client });
+				pushMessage({ nick: '*', text: nick + " 加入了聊天室，该用户来自：" + args.city + "\nTA正在使用 " + args.client + "\n系统认证：" + args.auth });
+			} else {
+				pushMessage({ nick: '*', text: nick + " 加入了聊天室，该用户来自：" + args.city + "\nTA正在使用 " + args.client });
 			}
 		}
 	},
@@ -692,7 +692,7 @@ var COMMANDS = {
 		}
 	},
 	onafkAdd: function (args) {
-		
+
 		console.log(args.nick)
 		var nick = args.nick;
 		userRemove(nick.split('｜')[0].split(']')[1])
@@ -724,9 +724,9 @@ var COMMANDS = {
 	},
 	changenick: function (args) {
 		var h5_mynick = document.querySelector("#mynick")
-		h5_mynick.innerHTML = '当前昵称：'+args.nick.split('#')[0]
+		h5_mynick.innerHTML = '当前昵称：' + args.nick.split('#')[0]
 	},
-	video: function(args) {
+	video: function (args) {
 		video_url = args.url
 		console.log('video url:', video_url)
 		if (video_url == 'none') {
@@ -749,21 +749,21 @@ var COMMANDS = {
 				//id: video_url.replace('/', '').replace(':', '').replace('&', '').replace('?','').replace('.','').replace('=', ''),
 				//id: '!@#$%^#$%^&&*()fjksahjfkdlahu<>?..,/.\\||````',
 				api: 'https://dplayer.moerats.com/',
-				user:myNick,
+				user: myNick,
 
 			},
 		});
 		dp.on('seeked', function () {
 			console.log(dp.video.currentTime)
-			ws.send(JSON.stringify({ cmd: 'send_seeked', vtime:dp.video.currentTime, nick:myNick.split('#')[0]}));
+			ws.send(JSON.stringify({ cmd: 'send_seeked', vtime: dp.video.currentTime, nick: myNick.split('#')[0] }));
 		});
 		dp.on('pause', function () {
 			console.log(dp.video.currentTime)
-			ws.send(JSON.stringify({ cmd: 'send_seeked', vtime:-10, nick:myNick.split('#')[0]}));
+			ws.send(JSON.stringify({ cmd: 'send_seeked', vtime: -10, nick: myNick.split('#')[0] }));
 		});
 		dp.on('play', function () {
 			console.log(dp.video.currentTime)
-			ws.send(JSON.stringify({ cmd: 'send_seeked', vtime:-20, nick:myNick.split('#')[0]}));
+			ws.send(JSON.stringify({ cmd: 'send_seeked', vtime: -20, nick: myNick.split('#')[0] }));
 		});
 		layer.open({
 			type: 1,
@@ -775,10 +775,10 @@ var COMMANDS = {
 			content: $('#player'),
 			end: function () {
 				dp.volume(0, true, true);
-				ws.send(JSON.stringify({cmd:'closed_video'}));
+				ws.send(JSON.stringify({ cmd: 'closed_video' }));
 			}
 		});
-		dp.switchVideo({url: video_url});
+		dp.switchVideo({ url: video_url });
 		dp.play()
 	},
 	/*
@@ -793,11 +793,11 @@ var COMMANDS = {
 	*/
 	send_seeked: function (args) {
 		if (dp.video.paused) {
-			ws.send(JSON.stringify({ cmd: 'invate_seeked', vtime:-10, nick:args.nick}));
+			ws.send(JSON.stringify({ cmd: 'invate_seeked', vtime: -10, nick: args.nick }));
 		}
-		ws.send(JSON.stringify({ cmd: 'invate_seeked', vtime:dp.video.currentTime, nick:args.nick}));
+		ws.send(JSON.stringify({ cmd: 'invate_seeked', vtime: dp.video.currentTime, nick: args.nick }));
 	},
-	set_seeked: function(args) {
+	set_seeked: function (args) {
 		if (args.nick != myNick.split('#')[0]) {
 			if (args.vtime == -10) {
 				dp.pause()
@@ -806,33 +806,33 @@ var COMMANDS = {
 			} else {
 				dp.seek(args.vtime)
 			}
-			
+
 		}
-		
+
 	},
-	cap: function(args) {
+	cap: function (args) {
 		cap_img = args.text
 		window.setTimeout(function () {
-			pushMessage({ nick: '*', text: cap_img})
+			pushMessage({ nick: '*', text: cap_img })
 		}, 500);
 	},
-	bye: function(args) {
+	bye: function (args) {
 		/*
 		received_bye = true
 		md.inline.ruler.enable([ 'katex' ]);
-                md.block.ruler.enable([ 'katex' ]);
+				md.block.ruler.enable([ 'katex' ]);
 		allowImages = true
 		*/
-		pushMessage({ nick: '*', text: "[NCX] 已免疫bye"});
+		pushMessage({ nick: '*', text: "[NCX] 已免疫bye" });
 
 	},//鱼鱼的新神秘功能
 	onpass: function (args) {
-		if(args.ispass == 'true') {
+		if (args.ispass == 'true') {
 			pass = true
 
 			//免疫语音限制
 			if (location.search.indexOf('?VOICE_') == 0) {
-				pushMessage({ nick: '*', text: '[NCX] 已免疫语音房限制，可以用/me来发言。'})
+				pushMessage({ nick: '*', text: '[NCX] 已免疫语音房限制，可以用/me来发言。' })
 				//$("#chatform").hide()
 				//$("#chatinput").hide()
 				$("#show-voice-msg-p").hide()
@@ -841,25 +841,25 @@ var COMMANDS = {
 				showVoiceMsg = true
 				//$("#voice").css('width', '100%').css('height', '3rem');
 			}
-			
-			
-			if(allowOld) {
+
+
+			if (allowOld) {
 				console.log('run1', localStorageGet('oldnum'))
-				if(localStorageGet('oldnum')) {
+				if (localStorageGet('oldnum')) {
 					console.log('run2')
 					setTimeout(() => {
-						ws.send(JSON.stringify({ cmd: 'get_old', num: localStorageGet('oldnum')}));
+						ws.send(JSON.stringify({ cmd: 'get_old', num: localStorageGet('oldnum') }));
 					}, 100)
-					
-					
-					
+
+
+
 				} else {
 					setTimeout(() => {
-						ws.send(JSON.stringify({ cmd: 'get_old', num: '20'}));
+						ws.send(JSON.stringify({ cmd: 'get_old', num: '20' }));
 					}, 100)
-					
+
 				}
-				
+
 			} else {
 				if (!localStorageGet("came")) {
 					pushMessage({ nick: '*', text: "你好，欢迎来到XChat。第一次来到XChat？可以发送“^readme”来查看这里的帮助文件。玩的开心，最后别忘了把这里添加到收藏夹哦～" });
@@ -876,13 +876,13 @@ function pushMessage(args) {
 	console.log(args)
 	// Message container
 	var messageEl = document.createElement('div');
-	
+
 	if (!args.tag) {
-		if (typeof (myNick) === 'string' && (args.text.match(new RegExp('@' + myNick.split('#')[0] + '\\b', "gi")) ||((args.type === "whisper" || args.type === "invite") && args.from))) {
+		if (typeof (myNick) === 'string' && (args.text.match(new RegExp('@' + myNick.split('#')[0] + '\\b', "gi")) || ((args.type === "whisper" || args.type === "invite") && args.from))) {
 			notify(args);
 		}
 	}
-	
+
 
 	messageEl.classList.add('message');
 
@@ -896,7 +896,7 @@ function pushMessage(args) {
 		messageEl.classList.add('admin');
 	} else if (args.mod) {
 		messageEl.classList.add('mod');
-	} else if(args.tag == 'old') {
+	} else if (args.tag == 'old') {
 		messageEl.classList.add('me');
 
 	}
@@ -908,14 +908,14 @@ function pushMessage(args) {
 
 	//加上XC最新抄袭的新用户昵称系统（即和hc一样的管理员名字前面有星星）
 	if (args.trip) {
-	    var tripEl = document.createElement('span');
-	    if (args.mod || args.admin){
-	        tripEl.textContent = String.fromCodePoint(11088) + " " + args.trip + " ";
-	    }else{
-	        tripEl.textContent = args.trip + " ";
-	    }
-	    tripEl.classList.add('trip');
-	    nickSpanEl.appendChild(tripEl);
+		var tripEl = document.createElement('span');
+		if (args.mod || args.admin) {
+			tripEl.textContent = String.fromCodePoint(11088) + " " + args.trip + " ";
+		} else {
+			tripEl.textContent = args.trip + " ";
+		}
+		tripEl.classList.add('trip');
+		nickSpanEl.appendChild(tripEl);
 	}
 
 	if (args.nick) {
@@ -946,8 +946,8 @@ function pushMessage(args) {
 		//感谢cc作出的贡献，以下内容来自cc
 		nickLinkEl.onclick = function () {
 			// Reply to a whisper or info is meaningless
-			if ( args.type == 'whisper' || args.nick == '*' || args.nick == '!' ) {
-				insertAtCursor( args.text );
+			if (args.type == 'whisper' || args.nick == '*' || args.nick == '!') {
+				insertAtCursor(args.text);
 				$$('#chat-input').focus();
 				return;
 			} else {
@@ -960,28 +960,28 @@ function pushMessage(args) {
 					nick = nick.replace('CC_', '')
 				}
 				*/
-				insertAtCursor( '@' + nick + ' ' );
+				insertAtCursor('@' + nick + ' ');
 				$$('#chatinput').focus();
 				return;
 			}
-			
+
 		}
 		// Mention someone when right-clicking
-		nickLinkEl.oncontextmenu = function ( e ) {
-			
+		nickLinkEl.oncontextmenu = function (e) {
+
 			e.preventDefault();
 			let replyText = '';
 			let originalText = args.text;
 			let overlongText = false;
-			
+
 			// Cut overlong text
-			if ( originalText.length > 350 ) {
+			if (originalText.length > 350) {
 				replyText = originalText.slice(0, 350);
 				overlongText = true;
 			}
 
 			// Add nickname
-			if ( args.trip ) {
+			if (args.trip) {
 				replyText = '>' + args.trip + ' ' + args.nick + '：\n';
 			} else {
 				replyText = '>' + args.nick + '：\n';
@@ -991,27 +991,27 @@ function pushMessage(args) {
 			originalText = originalText.split('\n');
 
 			// Cut overlong lines
-			if ( originalText.length >= 8 ) {
+			if (originalText.length >= 8) {
 				originalText = originalText.slice(0, 8);
 				overlongText = true;
 			}
 
-			for ( let replyLine of originalText ) {
+			for (let replyLine of originalText) {
 				// Cut third replied text
-				if ( !replyLine.startsWith('>>')) {
+				if (!replyLine.startsWith('>>')) {
 					replyText += '>' + replyLine + '\n';
 				}
 			}
 
 			// Add elipsis if text is cutted
-			if ( overlongText ) {
+			if (overlongText) {
 				replyText += '>……\n';
 			}
 			replyText += '\n';
 
 
 			// Add mention when reply to others
-			if ( args.nick != myNick ) {
+			if (args.nick != myNick) {
 				var nick = args.nick
 				if (args.nick.startsWith('HC_')) {
 					nick = nick.replace('HC_', '')
@@ -1028,7 +1028,7 @@ function pushMessage(args) {
 			replyText += $$('#chatinput').value;
 
 			$$('#chatinput').value = '';
-			insertAtCursor( replyText );
+			insertAtCursor(replyText);
 			$$('#chatinput').focus();
 		}
 
@@ -1036,58 +1036,58 @@ function pushMessage(args) {
 
 		var date = new Date(args.time || Date.now());
 		nickLinkEl.title = date.toLocaleString();
-		if(!(args.nick == '*' || args.nick == '!')) {
-			if(showHead) {
+		if (!(args.nick == '*' || args.nick == '!')) {
+			if (showHead) {
 				nickSpanEl.appendChild(imgEl);
 			}
-			
+
 		}
 		nickSpanEl.appendChild(nickLinkEl);
 	}
-	
+
 	//加上XC新抄袭的颜色功能
-	if (args.color && /(^[0-9A-F]{6}$)|(^[0-9A-F]{3}$)/i.test(args.color)){
+	if (args.color && /(^[0-9A-F]{6}$)|(^[0-9A-F]{3}$)/i.test(args.color)) {
 		nickLinkEl.setAttribute('style', 'color:#' + args.color + ' !important');
 	}
 
 	// Text
 	var textEl = document.createElement('p');
 	textEl.classList.add('text');
-	if(!args.tag) {
+	if (!args.tag) {
 		var html = ''
-		if (args.text.indexOf('USERSENDVOICE_')>=0 && showVoiceMsg) {
+		if (args.text.indexOf('USERSENDVOICE_') >= 0 && showVoiceMsg) {
 			html = `<audio controls><source src="https://xq.kzw.ink/oss/${args.text.replace('USERSENDVOICE_', '').replace('static/', '')}" type="audio/mpeg"></audio>`
 		} else {
 			html = md.render(args.text.replace(/files/g, 'https://xq.kzw.ink/files'))
 		}
 		textEl.innerHTML = html
-	}else {
+	} else {
 		var html = ''
-		args.text.forEach(v=> {
+		args.text.forEach(v => {
 			var content = md.render(v.content)
 			if (v.head) {
 				head_pic = v.head
 			} else {
 				head_pic = defaultHeadPic
 			}
-			
+
 			console.log($(content).text())
-			if (content.indexOf('USERSENDVOICE_')>=0 && showVoiceMsg) {
+			if (content.indexOf('USERSENDVOICE_') >= 0 && showVoiceMsg) {
 				var content2 = $(content).text()
 				if (showHead) {
-					html = `<div class="message"><span class="nick"><span class="trip">${v.trip} </span><img src="${head_pic}" style="height: 25px; width: 25px; margin-right: 0.5rem; vertical-align: top; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;"><a title="${v.time}">${v.nick}</a></span><p class="text"><p style="margin-left: 2rem;"><audio controls><source src="https://xq.kzw.ink/oss/${content2.replace('USERSENDVOICE_', '').replace('static/', '')}" type="audio/mpeg"></audio></p></p></div>`+html
+					html = `<div class="message"><span class="nick"><span class="trip">${v.trip} </span><img src="${head_pic}" style="height: 25px; width: 25px; margin-right: 0.5rem; vertical-align: top; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;"><a title="${v.time}">${v.nick}</a></span><p class="text"><p style="margin-left: 2rem;"><audio controls><source src="https://xq.kzw.ink/oss/${content2.replace('USERSENDVOICE_', '').replace('static/', '')}" type="audio/mpeg"></audio></p></p></div>` + html
 				} else {
-					html = `<div class="message"><span class="nick"><span class="trip">${v.trip} </span><a title="${v.time}">${v.nick}</a></span><p class="text"><p><audio controls><source src="https://xq.kzw.ink/oss/${content2.replace('USERSENDVOICE_', '').replace('static/', '')}" type="audio/mpeg"></audio></p></p></div>`+html
+					html = `<div class="message"><span class="nick"><span class="trip">${v.trip} </span><a title="${v.time}">${v.nick}</a></span><p class="text"><p><audio controls><source src="https://xq.kzw.ink/oss/${content2.replace('USERSENDVOICE_', '').replace('static/', '')}" type="audio/mpeg"></audio></p></p></div>` + html
 				}
 			} else {
 				if (showHead) {
-					html = `<div class="message"><span class="nick"><span class="trip">${v.trip} </span><img src="${head_pic}" style="height: 25px; width: 25px; margin-right: 0.5rem; vertical-align: top; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;"><a title="${v.time}">${v.nick}</a></span><p class="text"><p style="margin-left: 2rem;">${content}</p></p></div>`+html
+					html = `<div class="message"><span class="nick"><span class="trip">${v.trip} </span><img src="${head_pic}" style="height: 25px; width: 25px; margin-right: 0.5rem; vertical-align: top; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;"><a title="${v.time}">${v.nick}</a></span><p class="text"><p style="margin-left: 2rem;">${content}</p></p></div>` + html
 				} else {
-					html = `<div class="message"><span class="nick"><span class="trip">${v.trip} </span><a title="${v.time}">${v.nick}</a></span><p class="text"><p>${content}</p></p></div>`+html
+					html = `<div class="message"><span class="nick"><span class="trip">${v.trip} </span><a title="${v.time}">${v.nick}</a></span><p class="text"><p>${content}</p></p></div>` + html
 				}
 			}
-			
-			
+
+
 		})
 		textEl.innerHTML = html
 	}
@@ -1097,7 +1097,7 @@ function pushMessage(args) {
 	/*
 	var selector = document.querySelector("#font-selector")
 	var index = selector.selectedIndex
-    var value = selector.options[index].value
+	var value = selector.options[index].value
 	messageEl.className = '';
 	messageEl.classList.add('message')
 	messageEl.classList.add(value)
@@ -1118,7 +1118,7 @@ function pushHTML(args) {
 	var messageEl = document.createElement('div');
 
 	messageEl.classList.add('message');
-	
+
 	if (verifyNickname(myNick) && args.nick == myNick) {
 		messageEl.classList.add('me');
 	} else if (args.nick == '!') {
@@ -1138,14 +1138,14 @@ function pushHTML(args) {
 
 	//加上XC最新抄袭的新用户昵称系统（即和hc一样的管理员名字前面有星星）
 	if (args.trip) {
-	    var tripEl = document.createElement('span');
-	    if (args.mod || args.admin){
-	        tripEl.textContent = String.fromCodePoint(11088) + " " + args.trip + " ";
-	    }else{
-	        tripEl.textContent = args.trip + " ";
-	    }
-	    tripEl.classList.add('trip');
-	    nickSpanEl.appendChild(tripEl);
+		var tripEl = document.createElement('span');
+		if (args.mod || args.admin) {
+			tripEl.textContent = String.fromCodePoint(11088) + " " + args.trip + " ";
+		} else {
+			tripEl.textContent = args.trip + " ";
+		}
+		tripEl.classList.add('trip');
+		nickSpanEl.appendChild(tripEl);
 	}
 
 	if (args.nick) {
@@ -1163,9 +1163,9 @@ function pushHTML(args) {
 	textEl.innerHTML = args.text;
 
 	messageEl.appendChild(textEl);
-	
+
 	//XC原版没加上的HTML消息的颜色功能
-	if (args.color && /(^[0-9A-F]{6}$)|(^[0-9A-F]{3}$)/i.test(args.color)){
+	if (args.color && /(^[0-9A-F]{6}$)|(^[0-9A-F]{3}$)/i.test(args.color)) {
 		nickLinkEl.setAttribute('style', 'color:#' + args.color + ' !important');
 	}
 
@@ -1175,7 +1175,7 @@ function pushHTML(args) {
 	if (atBottom) {
 		window.scrollTo(0, document.body.scrollHeight);
 	}
-	
+
 	updateTitle();
 }
 
@@ -1196,7 +1196,7 @@ function send(data) {
 	if (ws && ws.readyState == ws.OPEN) {
 		console.log('[NCX] 发送消息记录')
 		console.log(data)
-		if(addOld) {
+		if (addOld) {
 			data.show = 1;
 		} else {
 			data.show = 0;
@@ -1206,18 +1206,18 @@ function send(data) {
 		} else {
 			data.head = defaultHeadPic
 		}
-		if(localStorageGet('killed') != 1) {
-			if(allowSend) {
+		if (localStorageGet('killed') != 1) {
+			if (allowSend) {
 				//页面命令
 				if (data.text) {
 					if (data.text.startsWith('/')) {
 						//data.text = data.text.substr(1);
-						var [cmd,arg1,arg2] = data.text.substr(1).split(' ')
+						var [cmd, arg1, arg2] = data.text.substr(1).split(' ')
 
 						//设置共享视频地址
 						if (cmd == 'video') {
 							console.log(arg1)
-							ws.send(JSON.stringify({cmd:'set_video', url: arg1}));
+							ws.send(JSON.stringify({ cmd: 'set_video', url: arg1 }));
 							return false;
 						}
 
@@ -1226,7 +1226,7 @@ function send(data) {
 							if (!arg2) {
 								arg2 = Math.random().toString(36).slice(2, 10)
 							}
-							ws.send(JSON.stringify({cmd:'invite', nick: arg1.replace(/^@/,''), to: arg2}));
+							ws.send(JSON.stringify({ cmd: 'invite', nick: arg1.replace(/^@/, ''), to: arg2 }));
 							console.log(`[NCX] invite邀请 邀请对象：${arg1} 邀请频道：${arg2}`)
 							return true;
 						}
@@ -1234,7 +1234,7 @@ function send(data) {
 						//invite真私聊，NCX特殊命令
 						if (cmd == 'i' || cmd == 'sw') {
 							let to = ` 实际上是要私信你：${arg2}`
-							ws.send(JSON.stringify({cmd:'invite', nick: arg1.replace(/^@/,''), to: to}));
+							ws.send(JSON.stringify({ cmd: 'invite', nick: arg1.replace(/^@/, ''), to: to }));
 							console.log(`[NCX] invite私聊 私聊对象：${arg1} 私聊文本：${arg2}`)
 							return true;
 						}
@@ -1243,15 +1243,15 @@ function send(data) {
 						//data.text = '/'+data.text;
 						//改掉鱼鱼的不太优雅的逻辑（想当年在这里加上斜杠还是我告诉他的，本来当时出现了普通命令要两个斜杠才能用的情况）
 					}
-					
+
 				}
 				if (pass) {
 					if (connectHC && wsHC && wsHC.readyState == wsHC.OPEN && data.text.startsWith('hc-')) {
 						data.text = data.text.replace('hc-', '')
-						if(!data.text.startsWith('/') || data.text.startsWith('/w') || data.text.startsWith('/r') ) { //不允许向hc服务器发送命令
+						if (!data.text.startsWith('/') || data.text.startsWith('/w') || data.text.startsWith('/r')) { //不允许向hc服务器发送命令
 							wsHC.send(JSON.stringify(data));
 						}
-						
+
 					}
 					/*
 					if (connectCC && wsCC && wsCC.readyState == wsCC.OPEN && data.text.startsWith('cc-')) {
@@ -1264,15 +1264,15 @@ function send(data) {
 					}
 					*/
 				}
-				
+
 				ws.send(JSON.stringify(data));
 			} else {
-				pushMessage({nick:'*', text:'当前昵称已被预留，请更换昵称'})
+				pushMessage({ nick: '*', text: '当前昵称已被预留，请更换昵称' })
 			}
 		} else {
 			alert('你已被管理员封杀，无法执行此操作。\n[NCX] 清除网站数据即可解除封杀。我们致力于让NCX用户能够免疫封杀。')
 		}
-		
+
 	}
 }
 
@@ -1442,8 +1442,8 @@ $$('#sidebar').onmouseleave = document.ontouchstart = function (event) {
 	var e = event.toElement || event.relatedTarget;
 	try {
 		if (e.parentNode == this || e == this) {
-	     return;
-	  }
+			return;
+		}
 	} catch (e) { return; }
 
 	if (!$$('#pin-sidebar').checked) {
@@ -1459,15 +1459,15 @@ $$('#clear-messages').onclick = function () {
 }
 
 $$('#set-bgimage').onclick = function () {
-	if(localStorageGet('bgurl') != null) {
+	if (localStorageGet('bgurl') != null) {
 		var bgurl = prompt('背景图片地址:', localStorageGet('bgurl'));
 	} else {
 		var bgurl = prompt('背景图片地址:');
 	}
-	if(bgurl == '') {
+	if (bgurl == '') {
 		alert('地址不能为空')
 	} else if (bgurl) {
-		if($$('.bg-img')) {
+		if ($$('.bg-img')) {
 			$$('#body').removeChild($$('.bg-img'))
 		}
 		$$('#scheme-link').href = "schemes/clear.css";
@@ -1486,16 +1486,16 @@ $$('#set-bgimage').onclick = function () {
 }
 
 $$('#set-head').onclick = function () {
-	if(localStorageGet('head') != null) {
+	if (localStorageGet('head') != null) {
 		var pic = prompt('头像地址:', localStorageGet('head'));
 	} else {
 		var pic = prompt('头像地址:');
 	}
-	if(pic == '') {
+	if (pic == '') {
 		alert('地址不能为空')
 		head = defaultHeadPic
 		localStorageSet('head', '');
-		
+
 	} else if (pic) {
 		head = pic
 		localStorageSet('head', head);
@@ -1514,8 +1514,8 @@ $$('#clear-nick').onclick = function () {
 	});
 }
 
-$$("#lay-video").onclick = function() {
-	ws.send(JSON.stringify({ cmd: 'get_video'}));
+$$("#lay-video").onclick = function () {
+	ws.send(JSON.stringify({ cmd: 'get_video' }));
 }
 
 // Restore settings from localStorage
@@ -1531,8 +1531,8 @@ if (localStorageGet('joined-left') == 'false') {
 
 if (localStorageGet('parse-latex') == 'false') {
 	$$('#parse-latex').checked = false;
-	md.inline.ruler.disable([ 'katex' ]);
-	md.block.ruler.disable([ 'katex' ]);
+	md.inline.ruler.disable(['katex']);
+	md.block.ruler.disable(['katex']);
 }
 
 $$('#pin-sidebar').onchange = function (e) {
@@ -1547,11 +1547,11 @@ $$('#parse-latex').onchange = function (e) {
 	var enabled = !!e.target.checked;
 	localStorageSet('parse-latex', enabled);
 	if (enabled) {
-		md.inline.ruler.enable([ 'katex' ]);
-		md.block.ruler.enable([ 'katex' ]);
+		md.inline.ruler.enable(['katex']);
+		md.block.ruler.enable(['katex']);
 	} else {
-		md.inline.ruler.disable([ 'katex' ]);
-		md.block.ruler.disable([ 'katex' ]);
+		md.inline.ruler.disable(['katex']);
+		md.block.ruler.disable(['katex']);
 	}
 }
 
@@ -1636,7 +1636,7 @@ $$('#show-voice-btn').onchange = function (e) {
 	} else {
 		$("#voice").hide()
 	}
-	
+
 }
 
 if (localStorageGet('show-revive-btn') == 'false') {
@@ -1654,7 +1654,7 @@ $$('#show-revive-btn').onchange = function (e) {
 	} else {
 		$("#revive").hide()
 	}
-	
+
 }
 
 if (localStorageGet('show-voice-msg') == 'false') {
@@ -1696,7 +1696,7 @@ $$('#ws-cc').onchange = function (e) {
 
 $("#revive").click(function () {
 	send({ cmd: 'move', channel: myChannel })
-  })
+})
 
 /*以上为复活部分*/
 
@@ -1754,46 +1754,46 @@ function userIgnore(nick) {
 }
 
 async function getMurmur() {
-    let excludes = {}
-    let options = {
-        excludes: excludes
-    }
-    /*
-    Fingerprint2.get(options, function (components) {
-        // 参数
-        const values = components.map(function (component) {
-            return component.value
-        });
-        // 指纹
-        murmur = Fingerprint2.x64hash128(values.webgl, 31);
-        console.log(murmur)
-    });
-    */
-    /*
-    await Fingerprint2.getPromise({}).then(components => {
-        // 参数
-        const values = components.map(function (component) {
-            return component.value
-        });
-        // 指纹
-        murmur = Fingerprint2.x64hash128(values[19].join(''), 31);
-        //console.log(murmur)
-    })
-    */
-    await Fingerprint2.getPromise({}).then(components => {
-        // 参数
+	let excludes = {}
+	let options = {
+		excludes: excludes
+	}
+	/*
+	Fingerprint2.get(options, function (components) {
+		// 参数
+		const values = components.map(function (component) {
+			return component.value
+		});
+		// 指纹
+		murmur = Fingerprint2.x64hash128(values.webgl, 31);
+		console.log(murmur)
+	});
+	*/
+	/*
+	await Fingerprint2.getPromise({}).then(components => {
+		// 参数
+		const values = components.map(function (component) {
+			return component.value
+		});
+		// 指纹
+		murmur = Fingerprint2.x64hash128(values[19].join(''), 31);
+		//console.log(murmur)
+	})
+	*/
+	await Fingerprint2.getPromise({}).then(components => {
+		// 参数
 		const values = components.map(function (component) {
 			return component.value
 		});
 		console.log(`[NCX]real murmurseed:${values[19].join('')}`)
-        if (murmurseed == 'real') {//真实指纹
+		if (murmurseed == 'real') {//真实指纹
 			murmurseed = values[19].join('');
 		}
 		console.log(`[NCX] current murmurseed:${murmurseed}`)
-        // 指纹
-        murmur = Fingerprint2.x64hash128(murmurseed, 31);
-        //console.log(murmur)
-    })
+		// 指纹
+		murmur = Fingerprint2.x64hash128(murmurseed, 31);
+		//console.log(murmur)
+	})
 }
 
 /* color scheme switcher */
