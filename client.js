@@ -17,7 +17,7 @@ var markdownOptions = {
 
 		if (lang && hljs.getLanguage(lang)) {
 			try {
-				return hljs.highlight(lang, str).value;
+				return hlallowSendjs.highlight(lang, str).value;
 			} catch (__) { }
 		}
 
@@ -456,10 +456,16 @@ function join(channel) {
 
 	ws.onmessage = function (message) {
 		var args = JSON.parse(message.data);
+
+		console.log('[NCX] 收到消息记录')
+		console.log(args)
+
 		var cmd = args.cmd;
 
 		var command = COMMANDS[cmd];
 		command.call(null, args);
+
+		log += message.data
 	}
 
 	function _0x5176bb(_0x3d6092) {
@@ -558,6 +564,9 @@ function joinCC(channel) {
 	}
 }
 */
+
+let log = ''
+
 nicks = null
 var COMMANDS = {
 	list: function (args) {
@@ -632,7 +641,7 @@ var COMMANDS = {
 		args.nick = '!';
 		pushMessage(args);
 		if (args.text == '该昵称已被其他用户预留') {
-			allowSend = false
+			// allowSend = false
 		}
 	},
 
@@ -872,8 +881,6 @@ var COMMANDS = {
 }
 
 function pushMessage(args) {
-	console.log('[NCX] 收到消息记录')
-	console.log(args)
 	// Message container
 	var messageEl = document.createElement('div');
 
