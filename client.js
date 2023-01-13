@@ -17,7 +17,7 @@ var markdownOptions = {
 
 		if (lang && hljs.getLanguage(lang)) {
 			try {
-				return hlallowSendjs.highlight(lang, str).value;
+				return hljs.highlight(lang, str).value;
 			} catch (__) { }
 		}
 
@@ -127,11 +127,11 @@ var verifyNickname = function (nick) {
 
 //主页
 var homeText = "# NewCrackedX\n##### \n-----\n" +
-	"当前NCX版本：lambda0.1(beta0.2(alpha0.13))\n" +
+	"当前NCX版本：lambda0.2(beta0.3(alpha0.14))\n" +
 	"对应XC版本：22/9/30\n" +
 	"**更新日志：**\n" +
 	"成功获取XC全部网页文件并在本地HTTP服务器正常访问；\nWS地址修改，可以正常连接XC；\n验证码地址替换，可以正常输入验证码；指纹替换；\n新增封杀免疫功能，且HTML消息会额外在控制台输出；\n主页更改为NCX主页；\n字体改为本地资源\n" +
-	"新增指纹种子功能，可以修改指纹种子，可以自动随机生成指纹种子；\n主页修改；\n新增免疫shout功能；\n新增真私聊功能；ajax改为本地资源；\n安全私聊功能修改；\n更新为新版昵称显示系统（支持昵称颜色、管理员星星），对bye命令做了一定程度的免疫处理；\n**破解指纹加密，修复指纹功能**" +
+	"新增指纹种子功能，可以修改指纹种子，可以自动随机生成指纹种子；\n主页修改；\n新增免疫shout功能；\n新增真私聊功能；ajax改为本地资源；\n安全私聊功能修改；\n更新为新版昵称显示系统（支持昵称颜色、管理员星星），对bye命令做了一定程度的免疫处理；\n**破解指纹加密，修复指纹功能；**\n增加日志功能，HTML优化，修复字体" +
 	"\n" +
 	"--- \n" +
 	"声明：NCX可能会出现没有自定义首页、功能残缺的版本，是无法移植原版客户端功能到标准版本时的实验版本，暂定代号lambda或ksi。\n\n" +
