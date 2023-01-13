@@ -1465,6 +1465,14 @@ $$('#clear-messages').onclick = function () {
 	messages.innerHTML = '';
 }
 
+let logs = []
+
+$$('#copy-log').onclick = function () {
+	navigator.clipboard.writeText(log)
+	logs.push(log)
+	log = ''
+}
+
 $$('#set-bgimage').onclick = function () {
 	if (localStorageGet('bgurl') != null) {
 		var bgurl = prompt('背景图片地址:', localStorageGet('bgurl'));
