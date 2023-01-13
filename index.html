@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,8 +17,7 @@
   <script src="vendor/hljs/highlight.min.js"></script>
   <link id="highlight-link" rel="stylesheet" href="vendor/hljs/styles/hybrid.min.css">
   <script src="vendor/remarkable/remarkable.min.js"></script>
-  <meta name="keywords"
-    content="NewCrackedX, XChat, 破解版">
+  <meta name="keywords" content="NewCrackedX, XChat, 破解版">
   <meta name="description"
     content="XChat是一个极简的网页在线匿名聊天工具，无需注册，一个昵称便可快捷使用。这里支持代码语法高亮、MarkDown和LaTex数学公式，并且支持网页在线发送语音、图片，同时拥有便于开发机器人的API。XChat基于hc开源模版优化而来。">
   <style>
@@ -57,7 +56,7 @@
 
     @font-face {
       font-family: 'Default_sans';
-      src: url(e61d8459-ee9b-4e19-9875-cb6cfc7ec62a.woff);
+      src: url(font1.woff);
     }
 
     body {
@@ -67,26 +66,26 @@
 </head>
 
 <body id="body">
-  <div id="player" style="display: none; width:100%; height:100%"></div>
-  <audio style="display: none" id="notify-sound" preload="auto" src="audio/notify.m4a">
+  <div id="player"></div>
+  <audio id="notify-sound" preload="auto" src="audio/notify.m4a">
     <source src="audio/notify.m4a" type="audio/ogg">
   </audio>
   <article class="container">
     <div id="messages" class="messages"></div>
   </article>
   <footer id="footer">
-    <div class="container" style="display: flex;">
-      <form id="chatform" class="message" style="width: 100%;">
-        <textarea id="chatinput" type="text" autocomplete="off" autofocus></textarea>
+    <div class="container">
+      <form id="chatform" class="message">
+        <textarea placeholder="​" id="chatinput" type="text" autocomplete="off" autofocus></textarea>
       </form>
-      <button id="revive" type="button" style="width: 2.5rem;">复活</button>
-      <button id="voice" type="button" style="width: 5rem;">发送语音</button>
+      <button id="voice" type="button">发送语音</button>
     </div>
 
   </footer>
   <nav id="sidebar">
     <div id="sidebar-content" class="hidden">
-      <h3 style="margin-bottom: 0.3rem">账户：</h3>
+      <h3>账户：</h3>
+      <!--style="margin-bottom: 0.3rem"-->
       <h4 id="mynick"></h4>
       <p>
         <input id="auto-login" type="checkbox">
@@ -182,15 +181,15 @@
       <hr>
       <p>
       <h4>颜色模式</h4>
-      <select id="scheme-selector"></select>
+      <select title="scheme-selector" id="scheme-selector"></select>
       </p>
       <p>
       <h4>高亮模式</h4>
-      <select id="highlight-selector"></select>
+      <select title="highlight-selector" id="highlight-selector"></select>
       </p>
       <p>
       <h4>字体大小</h4>
-      <select id="font-selector">
+      <select title="highlight-selector" id="font-selector">
         <option value="px10">10px</option>
         <option value="px12" selected>12px</option>
         <option value="px14">14px</option>
@@ -201,13 +200,13 @@
       </p>
       <p>
       <h4>显示聊天记录数量</h4>
-      <select id="old-selector">
+      <select title="old-selector" id="old-selector">
+        <option value="100">所有</option>
         <option value="10">10条</option>
         <option value="20" selected>20条</option>
         <option value="30">30条</option>
         <option value="40">40条</option>
         <option value="50">50条</option>
-        <option value="100">所有</option>
         <option value="1">今天所有</option>
       </select>
       </p>
@@ -234,6 +233,9 @@
       <p>
         <button type="button" id="clear-messages">清屏</button>
       </p>
+      <p>
+        <button type="button" id="copy-log">复制日志</button>
+      </p>
       <hr>
       <h4>在线用户</h4>
       <p>(点击以邀请)</p>
@@ -255,14 +257,14 @@
   <script src="static/dist/recorder-core.js"></script>
   <script src="static/dist/engine/mp3.js"></script>
   <script>
-    var selector = document.querySelector("#font-selector")
+    var font_selector = document.querySelector("#font-selector")
     var old_selector = document.querySelector("#old-selector")
     window.onload = function () {
 
       if (localStorage.getItem("index")) {
-        selector.selectedIndex = parseInt(localStorage.getItem('index'))
-        var index = selector.selectedIndex
-        var value = selector.options[index].value
+        font_selector.selectedIndex = parseInt(localStorage.getItem('index'))
+        var index = font_selector.selectedIndex
+        var value = font_selector.options[index].value
         //document.querySelector('.message').style.fontSize = value
         document.querySelectorAll('#messages').forEach(function (ele) {
           ele.className = '';
@@ -277,9 +279,9 @@
     }
 
 
-    selector.addEventListener('change', function () {
-      var index = selector.selectedIndex
-      var value = selector.options[index].value
+    font_selector.addEventListener('change', function () {
+      var index = font_selector.selectedIndex
+      var value = font_selector.options[index].value
       //document.querySelector('.message').style.fontSize = value
       document.querySelectorAll('#messages').forEach(function (ele) {
         ele.className = '';
@@ -395,7 +397,7 @@
       $("#play-voicertc").attr("disabled", true);
       alert('您已进入直播模式，所有声音将会被录制。如需退出，请刷新网页')
       console.log(window.localStorage['my-nick'].split('#')[1])
-      var socket = io('https://xq.kzw.ink/?password='+window.localStorage['my-nick'].split('#')[1], { transports: ['websocket'], path:'/socket.io' });
+      var socket = io('https://xq.kzw.ink/?password=' + window.localStorage['my-nick'].split('#')[1], { transports: ['websocket'], path: '/socket.io' });
       socket.binaryType = 'arraybuffer';
       var pe = null;
 
@@ -427,7 +429,7 @@
       alert('您正在聆听直播。如需退出，请刷新网页。')
       player = new PcmPlayer();
       player.play();
-      var socket = io('https://xq.kzw.ink/', { transports: ['websocket'], path:'/socket.io' });
+      var socket = io('https://xq.kzw.ink/', { transports: ['websocket'], path: '/socket.io' });
       socket.binaryType = 'arraybuffer';
       socket.on('to-player', function (data) {
         const buffer = new Float32Array(data);
