@@ -1654,23 +1654,22 @@ $$('#show-voice-btn').onchange = function (e) {
 
 }
 
-if (localStorageGet('show-revive-btn') == 'false') {
-	$$('#show-revive-btn').checked = false;
-	showReviveBtn = false;
-	$("#revive").hide()
-}
+// if (localStorageGet('show-revive-btn') == 'false') {
+// 	$$('#show-revive-btn').checked = false;
+// 	showReviveBtn = false;
+// 	$("#revive").hide()
+// }
 
-$$('#show-revive-btn').onchange = function (e) {
-	var enabled = !!e.target.checked;
-	localStorageSet('show-revive-btn', enabled);
-	showReviveBtn = enabled;
-	if (showReviveBtn) {
-		$("#revive").show()
-	} else {
-		$("#revive").hide()
-	}
-
-}
+// $$('#show-revive-btn').onchange = function (e) {
+// 	var enabled = !!e.target.checked;
+// 	localStorageSet('show-revive-btn', enabled);
+// 	showReviveBtn = enabled;
+// 	if (showReviveBtn) {
+// 		$("#revive").show()
+// 	} else {
+// 		$("#revive").hide()
+// 	}
+// }
 
 if (localStorageGet('show-voice-msg') == 'false') {
 	$$('#show-voice-msg').checked = false;
